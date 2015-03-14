@@ -1,0 +1,6 @@
+{
+  "name": "svg-change-color",
+  "description": "A jQuery plugin to change colors of a svg file",
+  "version": "0.0.1",
+  "keywords": ["javascript", "jquery", "svg", "color", "jquery"],
+}
