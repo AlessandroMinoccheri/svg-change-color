@@ -10,7 +10,7 @@ V 0.0.1
     $.fn.extend({      
         svgChangeColor: function (argumentOptions) {
             var defaults = {
-				
+				colors		: 'all'
 			}
 			
 			var options = $.extend(defaults, argumentOptions);
