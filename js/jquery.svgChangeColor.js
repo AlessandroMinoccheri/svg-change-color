@@ -14,11 +14,229 @@ V 0.0.1
 			}
 			
 			var options = $.extend(defaults, argumentOptions);
+            var arrColor = [];
+            var onlyColors = [];
+
+            colorToHex = function(color) {
+                if (color.substr(0, 1) === '#') {
+                    return color;
+                }
+                var digits = /(.*?)rgb\((\d+), (\d+), (\d+)\)/.exec(color);
+                
+                var red = parseInt(digits[2]);
+                var green = parseInt(digits[3]);
+                var blue = parseInt(digits[4]);
+                
+                var rgb = blue | (green << 8) | (red << 16);
+                return digits[1] + '#' + rgb.toString(16);
+            }
+
+            getColors = function(){
+                jQuery('#change-color-set').empty();
+                jQuery(document).find('path').each(function(){
+                    var color = jQuery(this).attr('fill');
+                    var isOk = '';
+
+                    if(color !== undefined) {
+                        if(color.indexOf('url(#') > -1){
+                            var id = color.replace('url(#', '').replace(')', '');
+                            if(id.indexOf('SVG') > -1) {
+                                jQuery('#' + id).find('stop').each(function(){
+                                    color = jQuery(this).css('stop-color');
+                                });
+                                
+                                color = colorToHex(color).toUpperCase();
+                                if(color == '#0'){
+                                    color = '#000000';
+                                }
+                                if(color == '#F'){
+                                    color = '#FFFFFF';
+                                }
+                                isOk  = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color);
+                                if(isOk){
+                                    if(onlyColors.length > 0) {
+                                        if((jQuery.inArray(color, arrColor) == -1 ) && (jQuery.inArray(color, onlyColors) >= 0)){
+                                            arrColor[i++] = color;
+                                        }
+                                    }
+                                    else{
+                                        if(jQuery.inArray(color, arrColor) == -1 ) {
+                                            arrColor[i++] = color; 
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else{
+                            isOk = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color);
+                            if(isOk){
+                                if(onlyColors.length > 0) {
+                                    if((jQuery.inArray(color, arrColor) == -1 ) && (jQuery.inArray(color, onlyColors) >= 0)){
+                                        arrColor[i++] = color;
+                                    }
+                                }
+                                else{
+                                    if(jQuery.inArray(color, arrColor) == -1 ) {
+                                        arrColor[i++] = color; 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+                jQuery(document).find('rect').each(function(){
+                    var color = jQuery(this).attr('fill');
+                    var isOk  = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color); 
+                    if(isOk){
+                        if(onlyColors.length > 0) {
+                            if((jQuery.inArray(color, arrColor) == -1 ) && (jQuery.inArray(color, onlyColors) >= 0)){
+                                arrColor[i++] = color;
+                            }
+                        }
+                        else{
+                            if(jQuery.inArray(color, arrColor) == -1 ) {
+                                arrColor[i++] = color; 
+                            }
+                        }
+                    }
+                });
+                jQuery(document).find('polygon').each(function(){
+                    var color = jQuery(this).attr('fill');
+                    var isOk  = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color); 
+                    if(isOk){
+                        if(onlyColors.length > 0) {
+                            if((jQuery.inArray(color, arrColor) == -1 ) && (jQuery.inArray(color, onlyColors) >= 0)){
+                                arrColor[i++] = color;
+                            }
+                        }
+                        else{
+                            if(jQuery.inArray(color, arrColor) == -1 ) {
+                                arrColor[i++] = color; 
+                            }
+                        }
+                    }
+                });
+                jQuery(document).find('path').each(function(){
+                    var color = jQuery(this).attr('fill');
+                    var isOk  = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color); 
+                    if(isOk){
+                        if(onlyColors.length > 0) {
+                            if((jQuery.inArray(color, arrColor) == -1 ) && (jQuery.inArray(color, onlyColors) >= 0)){
+                                arrColor[i++] = color;
+                            }
+                        }
+                        else{
+                            if(jQuery.inArray(color, arrColor) == -1 ) {
+                                arrColor[i++] = color; 
+                            }
+                        }
+                    }
+                });
+                jQuery(document).find('line').each(function(){
+                    var color = jQuery(this).attr('stroke');
+                    var isOk  = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color); 
+                    if(isOk){
+                        if(onlyColors.length > 0) {
+                            if((jQuery.inArray(color, arrColor) == -1 ) && (jQuery.inArray(color, onlyColors) >= 0)){
+                                arrColor[i++] = color;
+                            }
+                        }
+                        else{
+                            if(jQuery.inArray(color, arrColor) == -1 ) {
+                                arrColor[i++] = color; 
+                            }
+                        }
+                    }
+                });
+                jQuery(document).find('use').each(function(){
+                    var color = jQuery(this).attr('fill');
+                    var isOk = '';
+
+                    if(color !== undefined) {
+                        if(color.indexOf('url(#') > -1){
+                            var id = color.replace('url(#', '').replace(')', '');
+                            if(id.indexOf('SVG') > -1) {
+                                jQuery('#' + id).find('stop').each(function(){
+                                    color = jQuery(this).css('stop-color');
+                                });
+                                
+                                color = colorToHex(color).toUpperCase();
+                                if(color == '#0'){
+                                    color = '#000000';
+                                }
+                                if(color == '#F'){
+                                    color = '#FFFFFF';
+                                }
+                                color = colorToHex(color).toUpperCase();
+                                isOk  = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color);
+                                if(isOk){
+                                    if(onlyColors.length > 0) {
+                                        if((jQuery.inArray(color, arrColor) == -1 ) && (jQuery.inArray(color, onlyColors) >= 0)){
+                                            arrColor[i++] = color;
+                                        }
+                                    }
+                                    else{
+                                        if(jQuery.inArray(color, arrColor) == -1 ) {
+                                            arrColor[i++] = color; 
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else{
+                            isOk = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color);
+                            if(isOk){
+                                if(onlyColors.length > 0) {
+                                    if((jQuery.inArray(color, arrColor) == -1 ) && (jQuery.inArray(color, onlyColors) >= 0)){
+                                        arrColor[i++] = color;
+                                    }
+                                }
+                                else{
+                                    if(jQuery.inArray(color, arrColor) == -1 ) {
+                                        arrColor[i++] = color; 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                var cont = 0;
+                var div_to_append = '';
+                var left = 20;
+                arrColor.forEach(function(color) {
+                    cont++;
+                    var top = (30 * cont);
+                    if(cont == 1){
+                        top = top - 5;
+                        div_to_append = '<div class="list-color-in-tee-title" style="top: ' + top + 'px"><h4 style="color:#ffffff; font-size: 20px;">CAMBIA COLORI</h4></div>';
+                        cont++;
+                        top = (30 * cont);
+                    }
+                    if(cont >= 7){
+                        top = 30 * (cont - 5);
+                        left = 150;
+                    }
+
+                    var print = cont - 1;
+
+                    div_to_append += '<div id="list-color-' + print + '" class="list-color-in-tee" style="top: ' + top + 'px; left: ' + left + 'px"><span>COLORE ' +  print + '</span><div class="change-color-tee" data-color="' + color + '" style=" background: ' + color + ';"></div><div class="clear"></div></div>';
+                });
+                div_to_append += '</div>';
+
+                jQuery('#change-color-set').append(div_to_append);
+            }
+            }
 			
 			return this.each(function () {
                 var o 					= options;
 				var obj 				= $(this);
 				
+                if(o.colors != 'all') {
+                    onlyColors = o.colors;
+                }
+
+                getColors();
             });
         }
     });
