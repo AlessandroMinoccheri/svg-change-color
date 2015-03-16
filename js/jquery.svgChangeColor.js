@@ -16,6 +16,8 @@ V 0.0.1
 			var options = $.extend(defaults, argumentOptions);
             var arrColor = [];
             var onlyColors = [];
+            var svg = '';
+            var i = 0;
 
             colorToHex = function(color) {
                 if (color.substr(0, 1) === '#') {
@@ -33,7 +35,29 @@ V 0.0.1
 
             getColors = function(){
                 jQuery('#change-color-set').empty();
-                jQuery(document).find('path').each(function(){
+                svg.find('g').each(function(){
+                    var color = jQuery(this).css('fill');
+
+                    if((color !== 'none') && (color.indexOf('rgb') > -1)){
+                        color = colorToHex(color).toUpperCase();
+                    }
+                    
+                    var isOk  = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color); 
+                    if(isOk){
+                        if(onlyColors.length > 0) {
+                            if((jQuery.inArray(color, arrColor) == -1 ) && (jQuery.inArray(color, onlyColors) >= 0)){
+                                arrColor[i++] = color;
+                            }
+                        }
+                        else{
+                            if(jQuery.inArray(color, arrColor) == -1 ) {
+                                arrColor[i++] = color; 
+                            }
+                        }
+                    }
+                });
+
+                svg.find('path').each(function(){
                     var color = jQuery(this).attr('fill');
                     var isOk = '';
 
@@ -55,12 +79,15 @@ V 0.0.1
                                 isOk  = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color);
                                 if(isOk){
                                     if(onlyColors.length > 0) {
+                                        console.log('>');
                                         if((jQuery.inArray(color, arrColor) == -1 ) && (jQuery.inArray(color, onlyColors) >= 0)){
                                             arrColor[i++] = color;
                                         }
                                     }
                                     else{
+                                        console.log('==');
                                         if(jQuery.inArray(color, arrColor) == -1 ) {
+                                            console.log('color');
                                             arrColor[i++] = color; 
                                         }
                                     }
@@ -84,7 +111,7 @@ V 0.0.1
                         }
                     }
                 });
-                jQuery(document).find('rect').each(function(){
+                svg.find('rect').each(function(){
                     var color = jQuery(this).attr('fill');
                     var isOk  = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color); 
                     if(isOk){
@@ -100,7 +127,7 @@ V 0.0.1
                         }
                     }
                 });
-                jQuery(document).find('polygon').each(function(){
+                svg.find('polygon').each(function(){
                     var color = jQuery(this).attr('fill');
                     var isOk  = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color); 
                     if(isOk){
@@ -116,7 +143,7 @@ V 0.0.1
                         }
                     }
                 });
-                jQuery(document).find('path').each(function(){
+                svg.find('path').each(function(){
                     var color = jQuery(this).attr('fill');
                     var isOk  = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color); 
                     if(isOk){
@@ -132,7 +159,7 @@ V 0.0.1
                         }
                     }
                 });
-                jQuery(document).find('line').each(function(){
+                svg.find('line').each(function(){
                     var color = jQuery(this).attr('stroke');
                     var isOk  = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color); 
                     if(isOk){
@@ -148,7 +175,7 @@ V 0.0.1
                         }
                     }
                 });
-                jQuery(document).find('use').each(function(){
+                svg.find('use').each(function(){
                     var color = jQuery(this).attr('fill');
                     var isOk = '';
 
@@ -200,7 +227,7 @@ V 0.0.1
                         }
                     }
                 });
-
+                
                 var cont = 0;
                 var div_to_append = '';
                 var left = 20;
@@ -226,16 +253,17 @@ V 0.0.1
 
                 jQuery('#change-color-set').append(div_to_append);
             }
-            }
 			
 			return this.each(function () {
                 var o 					= options;
 				var obj 				= $(this);
-				
-                if(o.colors != 'all') {
+                svg                     = obj.find('svg');
+
+                if(o.colors !== 'all') {
                     onlyColors = o.colors;
                 }
 
+                obj.append('<div id="change-color-set"></div>')
                 getColors();
             });
         }
