@@ -1,3 +1,8 @@
+.list-color-in-tee span{
+    display: inline-block;
+    width: 100px;
+}
+
 .change-color-tee {
     width: 12px;
     height: 12px;
