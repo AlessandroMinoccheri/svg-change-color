@@ -257,6 +257,7 @@ V 0.0.1
 			return this.each(function () {
                 var o 					= options;
 				var obj 				= $(this);
+                var selected_part       = '';
                 svg                     = obj.find('svg');
 
                 if(o.colors !== 'all') {
@@ -265,6 +266,16 @@ V 0.0.1
 
                 obj.append('<div id="change-color-set"></div>')
                 getColors();
+
+                obj.on('click', '.change-color-tee', function(){
+                    var top = parseInt($(this).css('top')) + 30;
+                    var left = parseInt($(this).css('left'));
+
+                    $('.choose-color').css('top', top + 'px').css('left', left + 'px');
+                    $('.choose-color').show();
+
+                    selected_part = $(this).attr('id');
+                });
             });
         }
     });
