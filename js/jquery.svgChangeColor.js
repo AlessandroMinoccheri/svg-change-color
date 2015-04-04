@@ -249,7 +249,7 @@ V 0.0.1
 
                     div_to_append += '<div id="list-color-' + print + '" class="list-color-in-tee" style="top: ' + top + 'px; left: ' + left + 'px"><span>COLOR ' +  print + '</span><div class="change-color-tee" data-color="' + color + '" style=" background: ' + color + ';"></div><div class="clear"></div></div>';
                 });
-                div_to_append += '</div>';
+                div_to_append += '</div><div class="choose-color"></div>';
 
                 jQuery('#change-color-set').append(div_to_append);
             }
