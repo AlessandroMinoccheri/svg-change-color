@@ -269,12 +269,10 @@ V 0.0.1
                 getColors();
 
                 obj.on('click', '.change-color-tee', function(){
-                    console.log('test');
-                    var top = parseInt($(this).css('top')) + 30;
-                    var left = parseInt($(this).css('left'));
-
-                    $('.choose-color').css('top', top + 'px').css('left', left + 'px');
-                    $('.choose-color').show();
+                    var clone = $('.choose-color');
+                    $('.choose-color').remove();
+                    $(this).append(clone);
+                    $(document).find('.choose-color').show();
 
                     selected_part = $(this).attr('id');
                 });

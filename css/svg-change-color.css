@@ -1,8 +1,9 @@
+#change-color-set {
+    position: relative;
+}
+
 .choose-color {
     display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
     width: auto;
     height: auto;
     padding: 8px;
