@@ -8,7 +8,8 @@
         "plugin",
         "html",
         "svg",
-        "color"
+        "color",
+        "colorpicker"
     ],
     "version": "0.0.1",
     "author": {
