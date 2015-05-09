@@ -232,12 +232,12 @@ V 0.0.1
                 var div_to_append = '';
                 var left = 20;
                 arrColor.forEach(function(color) {
-                    cont++;
+                    cont = cont + 1;
                     var top = (30 * cont);
                     if(cont == 1){
                         top = top - 5;
                         div_to_append = '<div class="list-color-in-tee-title" style="top: ' + top + 'px"><h4 style="color:#ffffff; font-size: 20px;">CAMBIA COLORI</h4></div>';
-                        cont++;
+                        cont = cont + 1;
                         top = (30 * cont);
                     }
                     if(cont >= 7){
