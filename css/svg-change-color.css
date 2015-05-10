@@ -219,10 +219,8 @@
     height: 36px;
 }
 
-#colorSelector div {
+#colorSelectorContainer {
     position: absolute;
     top: 3px;
     left: 3px;
-    width: 30px;
-    height: 30px;
 }
