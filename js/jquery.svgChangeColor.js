@@ -253,6 +253,21 @@ V 0.0.1
                 div_to_append += '</div><div class="choose-color"><div id="colorSelector"><div style="background-color: #00ff00"></div></div></div>';
 
                 jQuery('#change-color-set').append(div_to_append);
+
+                $(document).find('#colorSelector').ColorPicker({
+                    color: '#0000ff',
+                    onShow: function (colpkr) {
+                        $(colpkr).fadeIn(500);
+                        return false;
+                    },
+                    onHide: function (colpkr) {
+                        $(colpkr).fadeOut(500);
+                        return false;
+                    },
+                    onChange: function (hsb, hex, rgb) {
+                        $('#colorSelector div').css('backgroundColor', '#' + hex);
+                    }
+                });
             }
 			
 			return this.each(function () {
