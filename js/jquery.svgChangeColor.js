@@ -250,7 +250,7 @@ V 0.0.1
                     div_to_append += '<div id="list-color-' + print + '" class="list-color-in-tee" style="top: ' + top + 'px; left: ' + left + 'px"><span>COLOR ' +  print + '</span><div class="change-color-tee" data-color="' + color + '" style=" background: ' + color + ';"></div><div class="clear"></div></div>';
                 });
 
-                div_to_append += '</div><div class="choose-color" style="width:1000px; height:1000px;"><div id="colorSelectorContainer" style="width:1000px; height: 10000px;"><div id="colorSelector"></div></div></div>';
+                div_to_append += '</div><div class="choose-color" style="width:1000px; height:1000px;"><div id="colorSelectorContainer" style="width:1000px; height: 1000px;"><div id="colorSelector"></div></div></div>';
 
                 jQuery('#change-color-set').append(div_to_append);
 
@@ -275,7 +275,7 @@ V 0.0.1
                 obj.on('click', '.change-color-tee', function(){
                     var clone = $('.choose-color');
                     $('.choose-color').remove();
-                    $(this).append(clone);
+                    $(this).after(clone);
                     $(document).find('.choose-color').show();
 
                     selected_part = $(this).attr('id');
