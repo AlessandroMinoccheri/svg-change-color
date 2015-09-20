@@ -236,7 +236,7 @@ V 0.0.1
                     var top = (30 * cont);
                     if(cont == 1){
                         top = top - 5;
-                        div_to_append = '<div class="list-color-in-tee-title" style="top: ' + top + 'px"><h4 style="color:#ffffff; font-size: 20px;">CAMBIA COLORI</h4></div>';
+                        div_to_append = '<div class="list-color-in-tee-title" style="top: ' + top + 'px"><h4 style="color:#000000; font-size: 20px;">CHANGE COLORS</h4></div>';
                         cont = cont + 1;
                         top = (30 * cont);
                     }
@@ -250,13 +250,10 @@ V 0.0.1
                     div_to_append += '<div id="list-color-' + print + '" class="list-color-in-tee" style="top: ' + top + 'px; left: ' + left + 'px"><span>COLOR ' +  print + '</span><div class="change-color-tee" data-color="' + color + '" style=" background: ' + color + ';"></div><div class="clear"></div></div>';
                 });
 
-                div_to_append += '</div><div class="choose-color" style="width:1000px; height:1000px;"><div id="colorSelectorContainer"><div class="picker"></div></div></div>';
+                div_to_append += '</div>';
 
                 jQuery('#change-color-set').append(div_to_append);
-
-                $(document).find('.picker').colpick({
-                    flat: true
-                });
+                jQuery('#change-color-set').append('<div class="choose-color" style="width:1000px; height:1000px;"><div id="colorSelectorContainer"><div class="picker"></div></div></div>');
             }
 			
 			return this.each(function () {
@@ -275,10 +272,13 @@ V 0.0.1
                 obj.on('click', '.change-color-tee', function(){
                     var clone = $('.choose-color');
                     $('.choose-color').remove();
-                    $(this).after(clone);
+                    $(this).closest('.list-color-in-tee').after(clone);
                     $(document).find('.choose-color').show();
 
                     selected_part = $(this).attr('id');
+                    $(document).find('.picker').colpick({
+                        flat: true
+                    });
                 });
             });
         }
